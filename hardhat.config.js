@@ -1,6 +1,7 @@
 /**
 * @type import('hardhat/config').HardhatUserConfig
 */
+
 require("@nomiclabs/hardhat-ethers");
 require('dotenv').config();
 const { PRIVATE_KEY } = process.env;
@@ -10,7 +11,7 @@ module.exports = {
     hardhat: {
     },
      PolygonMumbai: {
-      url: "https://rpc-mumbai.maticvigil.com",
+      url: "https://polygon-mumbai.g.alchemy.com/v2/ipHKDKAfKRNoPcCXESmgmfdRRczn04b_",
       accounts: [PRIVATE_KEY]
     }
   },
