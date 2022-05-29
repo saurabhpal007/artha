@@ -117,7 +117,7 @@ const BrandPage = () => {
    }
 
    useEffect(() => {
-      
+      getmintedBrands();
       checkIfWalletIsConnect()
       }, []);
    
@@ -180,12 +180,12 @@ const BrandPage = () => {
                </div>
                <div className="grid justify-center pt-6 lg:justify-between">
                   <div className="flex flex-col self-center text-sm text-center md:block lg:col-start-1 md:space-x-6">
-                     <span>©2022 All rights reserved</span>
+                     <span>Built for Hackisitica'22 </span>
                      <a rel="noopener noreferrer" href="#">
-                        <span>Privacy policy</span>
+                        <span>Deepak Pandey</span>
                      </a>
                      <a rel="noopener noreferrer" href="#">
-                        <span>Terms of service</span>
+                        <span>Saurabh Kumar Pal</span>
                      </a>
                   </div>
                   <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">

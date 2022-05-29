@@ -99,7 +99,7 @@ const AddApps = (props) => {
           <button className="absolute top-2 right-2">		
           </button>	
           <h2 className="text-2xl font-semibold leading-tight tracking-wide">Greeter.io</h2>
-          <p className="flex-1 text-center text-gray-400">Greeter.io is an App to integrate any tesamony into your NFT assets</p>
+          <p className="flex-1 text-center text-gray-400">Greet your customers, let them know that you care for them.</p>
           {greeterRenderFlag == 0 && (
               <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900" onClick={(e) => addGreeterApp(props.owner, props.tokenID)}>Add</button>
             )}
@@ -112,17 +112,17 @@ const AddApps = (props) => {
         <div className="relative flex flex-col items-center lg:m-10 max-w-lg gap-4 p-6 rounded-md shadow-md sm:py-8 sm:px-12 bg-gray-900 text-gray-100">
           <button className="absolute top-2 right-2">		
           </button>	
-          <h2 className="text-2xl font-semibold leading-tight tracking-wide">Greeter.io</h2>
-          <p className="flex-1 text-center text-gray-400">Greeter.io is an App to integrate any tesamony into your NFT assets</p>
-          <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900">Add App</button>
+          <h2 className="text-2xl font-semibold leading-tight tracking-wide">Review.io</h2>
+          <p className="flex-1 text-center text-gray-400">Allow your customers to write verifiable testimonails on blockchain. </p>
+          <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900 disabled">Coming Soon</button>
         </div>
 
         <div className="relative flex flex-col items-center lg:m-10 max-w-lg gap-4 p-6 rounded-md shadow-md sm:py-8 sm:px-12 bg-gray-900 text-gray-100">
           <button className="absolute top-2 right-2">		
           </button>	
-          <h2 className="text-2xl font-semibold leading-tight tracking-wide">Greeter.io</h2>
-          <p className="flex-1 text-center text-gray-400">Greeter.io is an App to integrate any tesamony into your NFT assets</p>
-          <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900">Add App</button>
+          <h2 className="text-2xl font-semibold leading-tight tracking-wide">Sales.io</h2>
+          <p className="flex-1 text-center text-gray-400">Create counterfeit-proof sales coupons with blockchain.</p>
+          <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900 disabled">Coming Soon</button>
         </div>
 
       </div>

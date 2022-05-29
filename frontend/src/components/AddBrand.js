@@ -20,7 +20,7 @@ const AddBrand = () => {
       history.push("/allBrands/");
    }
 
-  const contractAddress = "0x1C53D4BdCe09827059046998b3832AB9Df00793A";
+  const contractAddress = "0x11e3D82ebED1E82dA57e2512554EDe03846A00bf";
   const contractABI = abi.abi;
 
   const [logoUrl, setLogoUrl] = useState("");
