@@ -3,7 +3,7 @@ import { create } from "ipfs-http-client";
 import abi from '../utils/BrandNFT.json';
 import { ethers } from 'ethers';
 import { Web3Storage, File } from 'web3.storage/dist/bundle.esm.min.js';
-
+import { useHistory } from 'react-router-dom';
 
 function makeStorageClient() {
   return new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDNlY0RlMjk3NDlFOWQ2OEU5NjBjNTkxYzVDRjY5MWE5Nzc2MTc2YzUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTM3MDY0MDAxMjQsIm5hbWUiOiJBcnRoYU5GVCJ9.A0FsT-Fl6cPwgOiVVt7beyAC1E3Rmm9SxfDTrikkB7g" });
@@ -13,6 +13,12 @@ const client = create("https://ipfs.infura.io:5001/api/v0");
 
 const AddBrand = () => {
   // Render Methods
+
+  const history = useHistory();
+
+   const toBrandPage = () => {
+      history.push("/allBrands/");
+   }
 
   const contractAddress = "0x1C53D4BdCe09827059046998b3832AB9Df00793A";
   const contractABI = abi.abi;
@@ -106,7 +112,11 @@ const AddBrand = () => {
 
         let lastestMint = await BrandNFTContract.latestMintAddress();
         console.log("Latest NFT minted by...", lastestMint);
-      
+        
+        //navigate to All Brands page
+        
+        toBrandPage();
+
       } else {
         console.log("Ethereum object doesn't exist.");
       }
@@ -124,24 +134,86 @@ const AddBrand = () => {
   }
 
   return (
-    <div className="mainContainer">
-      <form>
-        <h4>Brand Name</h4>
-        <input type='text' placeholder="Brand Name" onChange={(e) => setBrandName(e.target.value)}></input>
-        <h4>Brand Description</h4>
-        <input type='text' placeholder="Brand Description" onChange={(e) => setBrandDescription(e.target.value)}></input>
-        <h4>Your Website</h4>
-        <input type='text' placeholder="Brand Website" onChange={(e) => setBrandWebsite(e.target.value)}></input>
-        <h4>Your Team</h4>
-        <input type='text' placeholder="Brand Team" onChange={(e) => addBrandTeam()}></input>
-        <h4>Logo</h4>
-        <input type='file' placeholder="Brand Logo" onChange={(e) => uploadBrandLogo(e)}></input>
-      </form>
+    <div>
+    <div className="bg-gray-800 lg:pb-20">
+      <header className="p-4 bg-gray-00 text-gray-100">
+            <div className="container flex justify-between h-16 mx-auto">
+               <div className="flex">
+                  <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-center p-2">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-8 h-8 text-green-400">
+                        <path d="M18.266 26.068l7.839-7.854 4.469 4.479c1.859 1.859 1.859 4.875 0 6.734l-1.104 1.104c-1.859 1.865-4.875 1.865-6.734 0zM30.563 2.531l-1.109-1.104c-1.859-1.859-4.875-1.859-6.734 0l-6.719 6.734-6.734-6.734c-1.859-1.859-4.875-1.859-6.734 0l-1.104 1.104c-1.859 1.859-1.859 4.875 0 6.734l6.734 6.734-6.734 6.734c-1.859 1.859-1.859 4.875 0 6.734l1.104 1.104c1.859 1.859 4.875 1.859 6.734 0l21.307-21.307c1.859-1.859 1.859-4.875 0-6.734z"></path>
+                     </svg>
+                     <h2 className="px-15 py-6 lg:p-10 text-3xl font-semibold rounded bg-grey-800 text-green-400">Artha.io</h2>
+                  </a>
+               </div>
+               <button className="p-4 lg:hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-gray-100">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+               </button>
+            </div>
+      </header>
 
-      <button onClick={mintNFT}>Mint Brand NFT</button>
+      <section className="p-6 bg-gray-700 text-gray-300">
+        <form className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid ">
+          <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900">
+            <div className="space-y-2 col-span-full lg:col-span-1">
+              <p className="font-medium text-2xl">General Inormation</p>
+              <p className="text-xs">Let us know little bit about your Brand, this information will be used to create your Brand's NFT.</p>
+            </div>
+            <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+              <div className="col-span-full sm:col-span-3">
+                <label for="brandname" className="text-sm">Brand Name</label>
+                <input id="brandname" type="text" placeholder="Artha.io" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-indigo-600 border-gray-300 text-gray-900" onChange={(e) => setBrandName(e.target.value)}/>
+              </div>
+              <div className="col-span-full sm:col-span-3">
+                <label for="website" className="text-sm">Website</label>
+                <input id="website" type="text" placeholder="www.Artha.io" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-indigo-600 border-gray-300 text-gray-900" onChange={(e) => setBrandWebsite(e.target.value)}/>
+              </div>
+              <div className="col-span-full">
+                <label for="description" className="text-sm">What do you offer?</label>
+                <input id="description" type="text" placeholder="Web3 Marketplace for digital brands" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-indigo-600 border-gray-300 text-gray-900" onChange={(e) => setBrandDescription(e.target.value)}/>
+              </div>
+              <div className="col-span-full">
+                <label for="overview" className="text-sm">Describe Your Brand</label>
+                <textarea id="overview" placeholder="Write about your mission, tell us what positions you uniquely in market" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-indigo-600 border-gray-300 text-gray-900" onChange={(e) => setBrandWebsite(e.target.value)}></textarea>
+              </div>
+              <div className="col-span-full">
+                <label for="logo" className="block text-sm font-medium">Add your Logo</label>
+                <div className="flex">
+                  <input type="file" name="logo" id="logo" className="px-8 py-12 border-2 border-dashed rounded-md border-gray-300 text-gray-600 bg-gray-100" onChange={(e) => uploadBrandLogo(e)}/>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset className=" grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900">
+            <div className="space-y-2 col-span-full lg:col-span-1">
+              <p className="font-medium text-2xl">Founder Information</p>
+              <p className="text-xs">Whose genius went into this?</p>
+            </div>
+            <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+              <div className="col-span-full sm:col-span-3">
+                <label for="username" className="text-sm">Name</label>
+                <input id="username" type="text" placeholder="Username" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-indigo-600 border-gray-300 text-gray-900" onChange={(e) => addBrandTeam()}/>
+              </div>
+              <div className="col-span-full sm:col-span-3">
+                <label for="position" className="text-sm">Position</label>
+                <input id="position" type="text" placeholder="CEO" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-indigo-600 border-gray-300 text-gray-900" onChange={(e) => addBrandTeam()}/>
+              </div>
+              <div className="col-span-full">
+                <label for="bio" className="text-sm">Tell us about yourself?</label>
+                <textarea id="bio" placeholder="I am an exprienced founder..." className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-indigo-600 border-gray-300 text-gray-900" onChange={(e) => addBrandTeam()}></textarea>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <div className="flex justify-center lg:mt-5">
+            <button type="button" className="px-8 py-3 content-center justify-center font-semibold rounded-full bg-green-400 text-gray-800" onClick={mintNFT}>Mint Brand NFT</button>
+        </div>
+        </section>
+    </div>
     </div>
   );
-
 };
 
 export default AddBrand;

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import abi from '../utils/GreeterFactory.json';
 import { ethers } from 'ethers';
+import Greeter from '../dApps/Greeter';
 
 const AddApps = (props) => {
   // Render Methods
   const [ currentAccount, setCurrentAccount ] = useState("");
+
+  //App Support - Greeter.io
+  const [ greeterRenderFlag, setGreeterRenderFlag ] = useState(0);
+  const [ greeterAddress, setGreeterAddress ] = useState("");
 
   const contractAddress = "0xEa1dD8b5c94741D81DCE06720645AbaAd65E9e53";
   const contractABI = abi.abi;
@@ -57,7 +62,6 @@ const AddApps = (props) => {
          //run the contract factory to Adding Apps
          //deploy the greeter smart contract
          //get the contract address and abi
-         // pass this as a prop to Greeter.js and render Greeter.js in routed path
       try {
          const { ethereum } = window;
          if (ethereum) {
@@ -65,24 +69,18 @@ const AddApps = (props) => {
          const signer = provider.getSigner();
          const GreeterFactory = new ethers.Contract(contractAddress, contractABI, signer);
 
-         //const Greeter = await GreeterFactory.createGreeter(_owner, _tokenID);
+         //const greeter = await GreeterFactory.createGreeter(_owner, _tokenID);
          
-         //console.log("Greeter App is successfully created at %s", Greeter);
-
          let contractID = await GreeterFactory.contractID();
          console.log("contract ID %s deployed", contractID);
 
-         let greeterList = await GreeterFactory.getContractAddress(contractID - 1);
-         console.log("address of greeter Contract", greeterList);
-
-            
-         /*
-         {Greeter && (
-            <Greeter contractAddress= {Greeter} contractABI= {contractABI} /> 
-         )}
-         */
+         let greeterContract = await GreeterFactory.getContractAddress(contractID - 1);
+         console.log("Greeter App is successfully created at", greeterContract);
          
-         }
+         setGreeterAddress(greeterContract);
+         setGreeterRenderFlag(1);
+
+        }
       } catch(error) {     
          console.log(error);
       }
@@ -92,20 +90,45 @@ const AddApps = (props) => {
     checkIfWalletIsConnect();
   },[]);
 
-  // Add components in the component folder
-
   return (
-    <div className="mainContainer">
+    //setup route to App on "Open App Button click"
 
-         <div className="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">
-            <div className="mt-6 mb-2">
-               <h2 className="text-xl font-semibold tracking-wide">Greeter.io</h2>
-            </div>
-            <p className="dark:text-gray-100">Setup customized greeting for your brand.</p>
-            <button type="button" className="px-8 py-3 font-semibold rounded bg-gray-800 text-gray-100" onClick={(e) => addGreeterApp(props.owner, props.tokenID)}>Add</button>
-         </div>
+    <div className="flex flex-col justify-center p-3 mx-auto">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="relative flex flex-col items-center lg:m-10 max-w-lg gap-4 p-6 rounded-md shadow-md sm:py-8 sm:px-12 bg-gray-900 text-gray-100">
+          <button className="absolute top-2 right-2">		
+          </button>	
+          <h2 className="text-2xl font-semibold leading-tight tracking-wide">Greeter.io</h2>
+          <p className="flex-1 text-center text-gray-400">Greeter.io is an App to integrate any tesamony into your NFT assets</p>
+          {greeterRenderFlag == 0 && (
+              <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900" onClick={(e) => addGreeterApp(props.owner, props.tokenID)}>Add</button>
+            )}
 
+          {!greeterRenderFlag == 0 && (
+              <Greeter contractAddress={greeterAddress}/>
+         )}
+        </div>
+
+        <div className="relative flex flex-col items-center lg:m-10 max-w-lg gap-4 p-6 rounded-md shadow-md sm:py-8 sm:px-12 bg-gray-900 text-gray-100">
+          <button className="absolute top-2 right-2">		
+          </button>	
+          <h2 className="text-2xl font-semibold leading-tight tracking-wide">Greeter.io</h2>
+          <p className="flex-1 text-center text-gray-400">Greeter.io is an App to integrate any tesamony into your NFT assets</p>
+          <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900">Add App</button>
+        </div>
+
+        <div className="relative flex flex-col items-center lg:m-10 max-w-lg gap-4 p-6 rounded-md shadow-md sm:py-8 sm:px-12 bg-gray-900 text-gray-100">
+          <button className="absolute top-2 right-2">		
+          </button>	
+          <h2 className="text-2xl font-semibold leading-tight tracking-wide">Greeter.io</h2>
+          <p className="flex-1 text-center text-gray-400">Greeter.io is an App to integrate any tesamony into your NFT assets</p>
+          <button type="button" className="px-8 py-3 font-semibold rounded-md bg-green-400 text-gray-900">Add App</button>
+        </div>
+
+      </div>
     </div>
+
+
   );
 
 };

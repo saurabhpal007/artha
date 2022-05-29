@@ -24,6 +24,7 @@
     "ipfs-http-client": "^56.0.3",
     "nft.storage": "^6.3.0",
     "react-bootstrap": "^2.4.0",
+    "react-router-dom": "^5.3.3",
     "web3.storage": "^4.2.0"
   }
 }
