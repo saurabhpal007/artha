@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import abi from '../utils/BrandNFT.json';
 import { ethers } from 'ethers';
-import { Web3Storage, File } from 'web3.storage/dist/bundle.esm.min.js';
 import { useHistory } from 'react-router-dom';
 
 function makeStorageClient() {
