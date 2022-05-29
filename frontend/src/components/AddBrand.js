@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { create } from "ipfs-http-client";
 import abi from '../utils/BrandNFT.json';
 import { ethers } from 'ethers';
 import { Web3Storage, File } from 'web3.storage/dist/bundle.esm.min.js';
@@ -9,7 +8,6 @@ function makeStorageClient() {
   return new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDNlY0RlMjk3NDlFOWQ2OEU5NjBjNTkxYzVDRjY5MWE5Nzc2MTc2YzUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTM3MDY0MDAxMjQsIm5hbWUiOiJBcnRoYU5GVCJ9.A0FsT-Fl6cPwgOiVVt7beyAC1E3Rmm9SxfDTrikkB7g" });
 }
 
-const client = create("https://ipfs.infura.io:5001/api/v0");
 
 const AddBrand = () => {
   // Render Methods
